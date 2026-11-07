@@ -80,4 +80,43 @@ ppanggolin all \
   --output beta_results_30 \
   --cpu 35
 
-  
+#Annotate Family Representative Sequences via eggnog-mapper
+ppanggolin fasta \
+  -p beta_results_30/pangenome.h5 \
+  --output beta_results_30/extracted_fasta \
+  --prot_families all
+
+#Map with COG annotations
+mkdir beta_results_30/extracted_annotations 
+emapper.py \
+  -i beta_results_30/extracted_fasta/all_protein_families.faa \
+  -o eggnog_annotations \
+  --output_dir beta_results_30/extracted_annotations \
+  --data_dir /RAID1/working/R324/Chiao/pan/eggnog_db \
+  -m diamond \
+  --pfam_realign realign \
+  --cpu 35
+
+
+
+
+
+#for gamma
+#Annotate Family Representative Sequences via eggnog-mapper
+ppanggolin fasta \
+  -p gamma_results_28/pangenome.h5 \
+  --output gamma_results_28/extracted_fasta \
+  --prot_families all
+
+#Map with COG annotations
+mkdir gamma_results_28extracted_annotations 
+emapper.py \
+  -i gamma_results_28/extracted_fasta/all_protein_families.faa \
+  -o eggnog_annotations \
+  --output_dir gamma_results_28/extracted_annotations \
+  --data_dir /RAID1/working/R324/Chiao/pan/eggnog_db \
+  -m diamond \
+  --pfam_realign realign \
+  --cpu 35
+
+
